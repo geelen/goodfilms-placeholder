@@ -1,6 +1,28 @@
+!!!
 %html
   %head
     %title= title
+    :javascript
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-21218109-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
   %body
-    %img{src: '/goodfilms_logo.png'}
-    %p= copy
+    #content
+      %img{src: '/goodfilms_logo.png'}
+      %p.copy= copy
+      %p.tagline= "#{title}, because life's too short for bad ones."
+      %form.signup{action: '/signup'}
+        %label{for: 'email_address'} Get in on the private beta:
+        %input{type: 'text', size: '30', id: 'email_address'}
+        %input{type: 'submit', name: 'Submit'}
+      %p.more_info
+        = title
+        is completely free and will only use this address once - to provide you with a code for the next round of private beta invites.
