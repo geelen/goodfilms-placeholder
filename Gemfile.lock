@@ -1,15 +1,25 @@
 GEM
+  remote: http://rubygems.org/
   specs:
+    bson (1.2.0)
+    bson_ext (1.2.0)
+    candy (0.2.10)
+      bson (>= 0.20.1)
+      bson_ext (>= 0.20.1)
+      mongo (>= 0.20.1)
     haml (3.0.25)
+    mongo (1.2.0)
+      bson (>= 1.2.0)
     rack (1.2.1)
     sinatra (1.1.2)
       rack (~> 1.1)
       tilt (~> 1.2)
-    tilt (1.2.1)
+    tilt (1.2.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  candy
   haml
   sinatra

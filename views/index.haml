@@ -19,7 +19,7 @@
       %img{src: '/goodfilms_logo.png'}
       %p.copy= copy
       %p.tagline= "#{title}, because life's too short for bad ones."
-      %form.signup{action: '/signup'}
+      %form.signup{action: '/signup', method: 'post'}
         %label{for: 'email_address'} Get in on the private beta:
         %input{type: 'text', size: '30', id: 'email_address'}
         %input{type: 'submit', name: 'Submit'}
