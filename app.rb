@@ -2,13 +2,19 @@ require 'sinatra'
 require 'haml'
 require 'digest/sha1'
 require 'candy'
-# Candy.db = 'goodfilms'
+BSON::ObjectID = BSON::ObjectId
+Candy.db = 'goodfilms'
 
 set :haml, :format => :html5, :escape_html => true
 
 class Object; alias :L :lambda; end
 
-class PrivateBetaSignup; include Candy::Piece; end
+class PrivateBetaSignup; include Candy::Piece end
+class PrivateBetaSignups; include Candy::Collection; collects :private_beta_signup end
+
+before {
+  puts "\n#{request.request_method} #{request.path} #{params.inspect}"
+}
 
 titles = L{|host| host =~ /movi/ ? 'goodmovi.es' : 'goodfil.ms' }
 copies = [L{|title| film = title.gsub(/^good|\.|s$/,''); %Q{
@@ -17,9 +23,9 @@ copies = [L{|title| film = title.gsub(/^good|\.|s$/,''); %Q{
   your time.
 }},L{|title| film = title.gsub(/^good|\.|s$/,''); %Q{
   Keep track of the #{film}s you plan to watch,
-  who you want to watch it with,
-  who recommended it to you,
-  and whether you thought it was great.
+  who you want to watch them with,
+  who recommended them to you,
+  and which ones you thought were great.
 }}]
 
 get '/' do
@@ -28,7 +34,7 @@ get '/' do
   haml :index, :locals => {title: title, copy: copy}
 end
 
-get '/signup' do
+post '/signup' do
   PrivateBetaSignup.new(email: params[:email], ip: request.ip, host: request.host)
   title = titles[request.host]
   haml :signup, :locals => {title: title}
