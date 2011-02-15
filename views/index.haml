@@ -81,7 +81,7 @@
       %form.signup{action: '/signup', method: 'post'}
         %label{for: 'email_address'} Add your email to get in on the private beta:
         #email_field
-          %input{type: 'text', size: '30', id: 'email_address', placeholder: 'email address'}
+          %input{type: 'text', size: '30', name: 'email_address', placeholder: 'email address'}
           %input.submit{type: 'submit', name: 'Submit'}
       %p.more_info
         = title

@@ -1,9 +1,19 @@
 require 'sinatra'
 require 'haml'
 require 'digest/sha1'
+require 'json'
+
 require 'candy'
 BSON::ObjectID = BSON::ObjectId
-Candy.db = 'goodfilms'
+
+# mongo stuffs for production
+if ENV['MONGOHQ_URL']
+  uri = URI.parse(ENV['MONGOHQ_URL'])
+  conn = Mongo::Connection.from_uri(ENV['MONGOHQ_URL'])
+  Candy.db = conn.db(uri.path.gsub(/^\//, ''))
+else
+  Candy.db = 'goodfilms'
+end
 
 set :haml, :format => :html5, :escape_html => true
 
@@ -35,7 +45,7 @@ get '/' do
 end
 
 post '/signup' do
-  PrivateBetaSignup.new(email: params[:email], ip: request.ip, host: request.host)
+  PrivateBetaSignup.new(email: params[:email_address], ip: request.ip, host: request.host, :at => Time.now)
   title = titles[request.host]
   haml :signup, :locals => {title: title}
 end
@@ -44,6 +54,11 @@ get '/:host/:copy' do
   title = titles[params[:host]]
   copy = copies[params[:copy].to_i][title]
   haml :index, :locals => {title: title, copy: copy}
+end
+
+get '/lolbfuscation' do
+  content_type :text
+  ([PrivateBetaSignups.count] + PrivateBetaSignups.map {|c| c.refresh.to_s}).join("\n")
 end
 
 get '*' do
