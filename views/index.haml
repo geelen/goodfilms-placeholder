@@ -14,9 +14,28 @@
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
+    :css
+      html {
+        background: url(/background.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
+      #content {
+        width: 480px;
+        margin: 0 auto;
+        background: rgba(255,255,255,0.9);
+        padding: 0 10px 10px 10px;
+      }
+      #logo {
+        width: 353px;
+        margin: 0 auto;
+      }
   %body
     #content
-      %img{src: '/goodfilms_logo.png'}
+      #logo
+        %img{src: "/#{title.gsub(/\./,'')}_logo.png"}
       %p.copy= copy
       %p.tagline= "#{title}, because life's too short for bad ones."
       %form.signup{action: '/signup', method: 'post'}
