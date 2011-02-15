@@ -2,5 +2,22 @@
 %html
   %head
     %title= "#{title} - Signed up!"
+    :css
+      html {
+        background: url(/background.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        font-family: georgia, times, serif;
+        font-size: 12pt;
+        color: white;
+      }
+      body {
+        width: 480px;
+        margin: 0 auto;
+        padding: 10px;
+        background-color: rgba(0,0,0,0.7);
+      }
   %body
     %p Great! You'll be notified when there's a spot for you.

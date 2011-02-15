@@ -15,33 +15,79 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     :css
+      /*
+      Copyright (c) 2010, Yahoo! Inc. All rights reserved.
+      Code licensed under the BSD License:
+      http://developer.yahoo.com/yui/license.html
+      version: 3.3.0
+      build: 3167
+      */
+      html{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym{border:0;font-variant:normal;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}input,textarea,select{*font-size:100%;}legend{color:#000;}
+    :css
       html {
         background: url(/background.jpg) no-repeat center center fixed;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
         background-size: cover;
+        font-family: georgia, times, serif;
+        font-size: 12pt;
+        color: white;
       }
       #content {
         width: 480px;
         margin: 0 auto;
-        background: rgba(255,255,255,0.9);
         padding: 0 10px 10px 10px;
+        background-color: rgba(0,0,0,0.7);
       }
       #logo {
         width: 353px;
-        margin: 0 auto;
+        margin: 1em auto 2em;
+        background: rgba(255,255,255,0.8);
+        padding: 20px;
+        -moz-border-radius: 15px;
+        border-radius: 15px;
       }
+      p.copy {
+        padding-top: 2em;
+      }
+      p.tagline {
+        font-weight: bold;
+        font-size: 120%;
+        margin: 2em 0em 2em 0;
+        text-align: center;
+      }
+      p.more_info {
+        font-size: 80%;
+      }
+      form.signup {
+        margin: 2em 0 2em 0;
+        text-align: center;
+      }
+      #email_field {
+        margin: 1em 1em;
+      }
+      #email_field .submit {
+        width: 80px;
+      }
+      a { color: #ccc; text-decoration: none; }
+      a:hover { text-shadow: 0px 0px 5px white; }
   %body
     #content
+      %p.copy= copy
       #logo
         %img{src: "/#{title.gsub(/\./,'')}_logo.png"}
-      %p.copy= copy
-      %p.tagline= "#{title}, because life's too short for bad ones."
+      %p.tagline= "because life's too short for bad ones."
       %form.signup{action: '/signup', method: 'post'}
-        %label{for: 'email_address'} Get in on the private beta:
-        %input{type: 'text', size: '30', id: 'email_address'}
-        %input{type: 'submit', name: 'Submit'}
+        %label{for: 'email_address'} Add your email to get in on the private beta:
+        #email_field
+          %input{type: 'text', size: '30', id: 'email_address', placeholder: 'email address'}
+          %input.submit{type: 'submit', name: 'Submit'}
       %p.more_info
         = title
-        is completely free and will only use this address once - to provide you with a code for the next round of private beta invites.
+        is completely free and will only use this address once - to provide
+        you with a code for the next round of private beta invites. Contact
+        - twit = title.gsub(/\./,'_')
+        %a{href: "http://twitter.com/#{twit}"}= "@#{twit}"
+        for more info.
+
