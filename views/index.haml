@@ -38,7 +38,7 @@
       html{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym{border:0;font-variant:normal;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}input,textarea,select{*font-size:100%;}legend{color:#000;}
     :css
       html {
-        background: url(/background.jpg) no-repeat center center fixed;
+        background: url(/background_full.jpg) no-repeat center center fixed;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
@@ -47,6 +47,17 @@
         font-size: 12pt;
         color: white;
       }
+      @media screen and (max-width: 1920px) {
+        html {
+          background: url(/background_1920.jpg) no-repeat center center fixed;
+        }
+      }
+      @media screen and (max-width: 1280px) {
+        html {
+          background: url(/background_1280.jpg) no-repeat center center fixed;
+        }
+      }
+
       #content {
         width: 480px;
         margin: 0 auto;
